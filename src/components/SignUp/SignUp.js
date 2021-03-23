@@ -59,7 +59,7 @@ class SignUp extends Component {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 required
-                name="text"
+                name="username"
                 value={username}
                 type="text"
                 placeholder="Username"
