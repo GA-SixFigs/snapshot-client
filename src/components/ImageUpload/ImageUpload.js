@@ -40,7 +40,7 @@ const ImageUpload = ({ user, msgAlert }) => {
             />
           </Form.Group>
           <Form.Group controlId="caption">
-            <Form.Label>handleCaptionChange </Form.Label>
+            <Form.Label>Caption</Form.Label>
             <Form.Control
               required
               type="text"

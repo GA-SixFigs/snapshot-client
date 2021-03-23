@@ -12,6 +12,7 @@ class SignUp extends Component {
     super(props)
 
     this.state = {
+      name: '',
       username: '',
       email: '',
       password: '',
@@ -38,7 +39,7 @@ class SignUp extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ username: '', email: '', password: '', passwordConfirmation: '' })
+        this.setState({ name: '', username: '', email: '', password: '', passwordConfirmation: '' })
         msgAlert({
           heading: 'Sign Up Failed with error: ' + error.message,
           message: messages.signUpFailure,
@@ -48,7 +49,7 @@ class SignUp extends Component {
   }
 
   render () {
-    const { username, email, password, passwordConfirmation } = this.state
+    const { name, username, email, password, passwordConfirmation } = this.state
 
     return (
       <div className="row">
@@ -63,6 +64,17 @@ class SignUp extends Component {
                 value={username}
                 type="text"
                 placeholder="Username"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                required
+                name="name"
+                value={name}
+                type="text"
+                placeholder="Name"
                 onChange={this.handleChange}
               />
             </Form.Group>
