@@ -9,8 +9,11 @@ import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
+
 import PictureIndex from './routes/PictureIndex'
 import PictureShow from './routes/PictureShow'
+import ImageUpload from './components/ImageUpload/ImageUpload'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -71,6 +74,10 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/pictures/:id' render={() => (
             <PictureShow msgAlert={this.msgAlert} user={user} />
+          )} />
+
+          <AuthenticatedRoute user={user} path='/image-upload' render={() => (
+            <ImageUpload msgAlert={this.msgAlert} user={user} />
           )} />
 
         </main>
