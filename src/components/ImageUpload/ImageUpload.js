@@ -20,20 +20,21 @@ const ImageUpload = ({ user, msgAlert }) => {
 
   const handleImageSubmit = event => {
     console.log(event)
+    console.log(messages)
   }
 
   return (
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
         <h3>Upload Image</h3>
-        <Form onSubmit={onImageUpload}>
+        <Form onSubmit={handleImageSubmit}>
           <Form.Group controlId="image">
             <Form.Label>Select a file: </Form.Label>
             <Form.Control
               required
               type="image"
               name="image"
-              value={image}
+              value={title}
               placeholder="Choose Image"
               onChange={handleImageSubmit}
             />
