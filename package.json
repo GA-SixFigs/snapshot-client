@@ -1,6 +1,6 @@
 {
   "name": "snapshot-client",
-  "homepage": "https://cmd08010.github.io/snapshot-client",
+  "homepage": "https://ga-sixfigs.github.io/snapshot-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
