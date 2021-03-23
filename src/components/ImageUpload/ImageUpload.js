@@ -32,9 +32,8 @@ const ImageUpload = ({ user, msgAlert }) => {
             <Form.Label>Select a file: </Form.Label>
             <Form.Control
               required
-              type="image"
+              type="file"
               name="image"
-              value={title}
               placeholder="Choose Image"
               onChange={handleImageSubmit}
             />
