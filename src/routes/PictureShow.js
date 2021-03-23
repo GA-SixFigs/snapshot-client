@@ -88,8 +88,7 @@ class ShowPicture extends Component {
       // we have a book! Display it
       pictureJsx = (
         <div>
-          <h4>{picture.title}</h4>
-          <p>{picture.director}</p>
+          <h4>{picture.title}</h4>          
           <button onClick={this.deletePicture}>Delete Me</button>
           {/*  // <button>
           //   <Link to={'/update-book/' + this.props.match.params.id}>Update Me</Link>
