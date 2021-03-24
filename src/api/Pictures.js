@@ -34,6 +34,7 @@ export const pictureShow = (id) => {
     // }
   })
 }
+
 export const pictureDelete = (user, id) => {
   return axios({
     url: apiUrl + '/pictures/' + id,
