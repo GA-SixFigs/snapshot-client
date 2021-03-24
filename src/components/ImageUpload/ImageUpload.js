@@ -9,25 +9,19 @@ import FormFile from 'react-bootstrap/FormFile'
 import Button from 'react-bootstrap/Button'
 
 const ImageUpload = ({ user, msgAlert }) => {
-  // const [title, setTitle] = useState('')
-  // const [caption, setCaption] = useState('')
+  const [caption, setCaption] = useState('')
   const [image, setImage] = useState(null)
 
-  // const handleTitleChange = event => {
-  //   setTitle(event.target.value)
-  // }
-  //
-  // const handleCaptionChange = event => {
-  //   setCaption(event.target.value)
-  // }
+  const handleCaptionChange = event => {
+    setCaption(event.target.value)
+  }
 
   const handleImageSubmit = event => {
     event.preventDefault()
     const data = new FormData()
     data.append('picture', image)
-    console.log(image, 'my event from handling the submission')
-    // console.log(messages)
-    pictureCreate(data)
+    pictureCreate(user, data)
+      .then(response => console.log(response, 'from the api after pic'))
   }
 
   const handleImageAdd = event => {
@@ -47,6 +41,17 @@ const ImageUpload = ({ user, msgAlert }) => {
               onChange={handleImageAdd}
             />
           </Form.Group>
+          <Form.Group controlId="caption">
+            <Form.Label>Caption</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="caption"
+              value={caption}
+              placeholder="Enter Caption"
+              onChange={handleCaptionChange}
+            />
+          </Form.Group>
           <Button
             variant="primary"
             type="submit"
@@ -60,26 +65,3 @@ const ImageUpload = ({ user, msgAlert }) => {
 }
 
 export default withRouter(ImageUpload)
-
-// <Form.Group controlId="caption">
-//   <Form.Label>Caption</Form.Label>
-//   <Form.Control
-//     required
-//     type="text"
-//     name="caption"
-//     value={caption}
-//     placeholder="Enter Caption"
-//     onChange={handleCaptionChange}
-//   />
-// </Form.Group>
-// <Form.Group controlId="title">
-//   <Form.Label>title</Form.Label>
-//   <Form.Control
-//     required
-//     name="text"
-//     value={title}
-//     type="title"
-//     placeholder="Title"
-//     onChange={handleTitleChange}
-//   />
-// </Form.Group>
