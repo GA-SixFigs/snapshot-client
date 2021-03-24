@@ -30,6 +30,7 @@ const ImageUpload = ({ user, msgAlert }) => {
         setImageURL(response.data.picture.url)
       })
       .then(response => setLoading(false))
+      .catch(console.error)
   }
 
   const handleImageAdd = event => {
