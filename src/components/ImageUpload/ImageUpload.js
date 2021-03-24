@@ -7,10 +7,14 @@ import { pictureCreate } from '../../api/Pictures'
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
+import Spinner from 'react-bootstrap/Spinner'
 
 const ImageUpload = ({ user, msgAlert }) => {
   const [caption, setCaption] = useState('')
   const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [imageURL, setImageURL] = useState(null)
 
   const handleCaptionChange = event => {
     setCaption(event.target.value)
@@ -20,13 +24,24 @@ const ImageUpload = ({ user, msgAlert }) => {
     event.preventDefault()
     const data = new FormData()
     data.append('picture', image)
-    pictureCreate(user, data)
-      .then(response => console.log(response, 'from the api after pic'))
+    setLoading(true)
+    pictureCreate(data)
+      .then(response => {
+        setImageURL(response.data.picture.url)
+      })
+      .then(response => setLoading(false))
   }
 
   const handleImageAdd = event => {
-    console.log(event.target.files[0])
     setImage(event.target.files[0])
+  }
+
+  if (loading && !imageURL) {
+    return (
+      <Spinner animation="border" variant="info">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    )
   }
 
   return (
@@ -60,6 +75,7 @@ const ImageUpload = ({ user, msgAlert }) => {
           </Button>
         </Form>
       </div>
+      <Image src={imageURL} thumbnail/>
     </div>
   )
 }
