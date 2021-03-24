@@ -1,12 +1,10 @@
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
-export const pictureCreate = (picture) => {
-  const data = new FormData()
-  data.append('file', picture)
-  console.log(data.values, 'this is my data in the api request file')
+export const pictureCreate = (data) => {
+  console.log(data, 'this is my picture in the api request file')
   return axios({
-    url: apiUrl + '/pictures/',
+    url: apiUrl + '/pictures',
     method: 'POST',
     data
   })
