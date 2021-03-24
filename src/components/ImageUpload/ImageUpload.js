@@ -7,32 +7,41 @@ import { pictureCreate } from '../../api/Pictures'
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
+import Spinner from 'react-bootstrap/Spinner'
 
 const ImageUpload = ({ user, msgAlert }) => {
-  // const [title, setTitle] = useState('')
-  // const [caption, setCaption] = useState('')
+  const [caption, setCaption] = useState('')
   const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [imageURL, setImageURL] = useState(null)
 
-  // const handleTitleChange = event => {
-  //   setTitle(event.target.value)
-  // }
-  //
-  // const handleCaptionChange = event => {
-  //   setCaption(event.target.value)
-  // }
+  const handleCaptionChange = event => {
+    setCaption(event.target.value)
+  }
 
   const handleImageSubmit = event => {
     event.preventDefault()
     const data = new FormData()
     data.append('picture', image)
-    console.log(image, 'my event from handling the submission')
-    // console.log(messages)
+    setLoading(true)
     pictureCreate(data)
+      .then(response => {
+        setImageURL(response.data.picture.url)
+      })
+      .then(response => setLoading(false))
   }
 
   const handleImageAdd = event => {
-    console.log(event.target.files[0])
     setImage(event.target.files[0])
+  }
+
+  if (loading && !imageURL) {
+    return (
+      <Spinner animation="border" variant="info">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    )
   }
 
   return (
@@ -47,6 +56,17 @@ const ImageUpload = ({ user, msgAlert }) => {
               onChange={handleImageAdd}
             />
           </Form.Group>
+          <Form.Group controlId="caption">
+            <Form.Label>Caption</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="caption"
+              value={caption}
+              placeholder="Enter Caption"
+              onChange={handleCaptionChange}
+            />
+          </Form.Group>
           <Button
             variant="primary"
             type="submit"
@@ -55,31 +75,9 @@ const ImageUpload = ({ user, msgAlert }) => {
           </Button>
         </Form>
       </div>
+      <Image src={imageURL} thumbnail/>
     </div>
   )
 }
 
 export default withRouter(ImageUpload)
-
-// <Form.Group controlId="caption">
-//   <Form.Label>Caption</Form.Label>
-//   <Form.Control
-//     required
-//     type="text"
-//     name="caption"
-//     value={caption}
-//     placeholder="Enter Caption"
-//     onChange={handleCaptionChange}
-//   />
-// </Form.Group>
-// <Form.Group controlId="title">
-//   <Form.Label>title</Form.Label>
-//   <Form.Control
-//     required
-//     name="text"
-//     value={title}
-//     type="title"
-//     placeholder="Title"
-//     onChange={handleTitleChange}
-//   />
-// </Form.Group>
