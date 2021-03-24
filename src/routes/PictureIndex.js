@@ -18,7 +18,7 @@ class PictureIndex extends Component {
 
     // fetch all of our movies
     pictureIndex(user)
-      .then(res => this.setState({ pictures: res.data.picture }))
+      .then(res => this.setState({ pictures: res.data.pictures }))
       .then(() => msgAlert({
         heading: 'Loaded Pictures Successfully',
         message: 'Viewing all Pictures. Click on one to see its page',
@@ -43,8 +43,7 @@ class PictureIndex extends Component {
     const picturesJSX = pictures.map(picture => (
       <Link to={`/pictures/${picture._id}`} key={picture._id}>
         <li>
-          {picture.url}
-          {picture.caption}
+          <img src={picture.url}/>
         </li>
       </Link>
     ))

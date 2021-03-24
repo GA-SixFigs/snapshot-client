@@ -22,13 +22,13 @@ export const pictureIndex = user => {
   })
 }
 
-export const pictureShow = (user, id) => {
+export const pictureShow = (id) => {
   return axios({
     url: apiUrl + '/pictures/' + id,
-    method: 'Get',
-    headers: {
-      'Authorization': `Bearer ${user.token}`
-    }
+    method: 'Get'
+    // headers: {
+    //   'Authorization': `Bearer ${user.token}`
+    // }
   })
 }
 export const pictureDelete = (user, id) => {
