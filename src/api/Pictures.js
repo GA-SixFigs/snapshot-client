@@ -1,6 +1,17 @@
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
+export const pictureCreate = (picture) => {
+  const data = new FormData()
+  data.append('file', picture)
+  console.log(data.values, 'this is my data in the api request file')
+  return axios({
+    url: apiUrl + '/pictures/',
+    method: 'POST',
+    data
+  })
+}
+
 export const pictureIndex = user => {
   return axios({
     url: apiUrl + '/pictures',
