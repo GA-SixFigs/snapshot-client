@@ -25,10 +25,10 @@ class ShowPicture extends Component {
   // request using the ID param in the front-end route URL
   // and set the state to trigger a re-render
   componentDidMount () {
-    const { msgAlert, user, match } = this.props
+    const { msgAlert, match } = this.props
 
     console.log(this.props)
-    pictureShow(user, match.params.id)
+    pictureShow(match.params.id)
     //  set the createdMovieId to the _id of the movie we got in the response data
       .then(res => this.setState({ picture: res.data.picture }))
 
@@ -88,7 +88,7 @@ class ShowPicture extends Component {
       // we have a book! Display it
       pictureJsx = (
         <div>
-          <h4>{picture.title}</h4>
+          <img src={picture.url}/>
           <button onClick={this.deletePicture}>Delete Me</button>
           {/*  // <button>
           //   <Link to={'/update-book/' + this.props.match.params.id}>Update Me</Link>
