@@ -17,7 +17,7 @@ export const pictureIndex = user => {
     // include an authorization header, that includes our user's token
     // so the API knows who to sign out
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Bearer ${user.token}`
     }
   })
 }
@@ -27,7 +27,7 @@ export const pictureShow = (user, id) => {
     url: apiUrl + '/pictures/' + id,
     method: 'Get',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Bearer ${user.token}`
     }
   })
 }
@@ -36,7 +36,7 @@ export const pictureDelete = (user, id) => {
     url: apiUrl + '/pictures/' + id,
     method: 'DELETE',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Bearer ${user.token}`
     }
   })
 }
@@ -45,7 +45,7 @@ export const pictureUpdate = (id, picture, user) => {
     url: apiUrl + '/pictures/' + id,
     method: 'PATCH',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Bearer ${user.token}`
     },
     data: { picture }
   })
