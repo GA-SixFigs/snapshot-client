@@ -82,17 +82,12 @@ class ShowPicture extends Component {
       // if deleted is true, we can redirect
       return <Redirect to="/pictures"/>
     } else if (!picture) {
-      // loading, no book yet
       pictureJsx = <p>Loading...</p>
     } else {
-      // we have a book! Display it
       pictureJsx = (
         <div>
           <img src={picture.url}/>
           <button onClick={this.deletePicture}>Delete Me</button>
-          {/*  // <button>
-          //   <Link to={'/update-book/' + this.props.match.params.id}>Update Me</Link>
-          // </button> */}
         </div>
       )
     }

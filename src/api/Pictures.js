@@ -1,11 +1,14 @@
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 
-export const pictureCreate = (data) => {
-  console.log(data, 'this is my picture in the api request file')
+export const pictureCreate = (user, data) => {
+  console.log(user, 'this is my user in the api request file')
   return axios({
     url: apiUrl + '/pictures',
     method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    },
     data
   })
 }

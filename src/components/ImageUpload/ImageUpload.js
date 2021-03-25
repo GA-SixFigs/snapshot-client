@@ -25,7 +25,7 @@ const ImageUpload = ({ user, msgAlert }) => {
     const data = new FormData()
     data.append('picture', image)
     setLoading(true)
-    pictureCreate(data)
+    pictureCreate(user, data)
       .then(response => {
         setImageURL(response.data.picture.url)
       })
@@ -59,7 +59,6 @@ const ImageUpload = ({ user, msgAlert }) => {
           <Form.Group controlId="caption">
             <Form.Label>Caption</Form.Label>
             <Form.Control
-              required
               type="text"
               name="caption"
               value={caption}
