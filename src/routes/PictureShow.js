@@ -57,13 +57,13 @@ class ShowPicture extends Component {
       .then(res => this.setState({ deleted: true }))
 
       .then(() => msgAlert({
-        heading: 'Showing Picture Successfully',
-        message: 'Showing Created Picture.',
+        heading: 'Deleted Picture Successfully',
+        message: 'Deleted Picture.',
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Failed Showing picture',
+          heading: 'Failed Deleting picture',
           message: 'Could not create picture with error:' + error.messge,
           variant: 'danger'
         })
@@ -75,7 +75,7 @@ class ShowPicture extends Component {
     // to the value of the `book` key on `this.state`
     const { picture, deleted } = this.state
     // 2 scenarios: loading, book to show
-
+    // console.log(picture + 'this is my picture obj')
     let pictureJsx = ''
 
     if (deleted) {

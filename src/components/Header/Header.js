@@ -29,6 +29,7 @@ const Header = ({ user }) => (
     <Navbar.Brand href="#">
       SnapShot
     </Navbar.Brand>
+    <img src="logo-withoutbackground.png" style={{ height: '250px', width: '300px' }}/>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
