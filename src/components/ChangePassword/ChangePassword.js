@@ -27,11 +27,17 @@ class ChangePassword extends Component {
   })
 
   onHandlePrivacyChange = (event) => {
+    const { msgAlert } = this.props
     this.props.handlePrivacyChange(event)
     this.setState(prevState => {
       return {
         privacy: !prevState.privacy
       }
+    })
+    msgAlert({
+      heading: 'Privacy Change Completed',
+      message: messages.privacyChangeSuccess,
+      variant: 'success'
     })
   }
 
@@ -65,15 +71,17 @@ class ChangePassword extends Component {
           <h3>User Privacy</h3>
           <Form>
             <Form.Group controlId="privacy">
-              <Form.Label>Privacy Settings: {this.state.privacy ? 'private' : 'not private'}</Form.Label>
+              <Form.Label>Privacy Settings: User Profile is <b>{this.state.privacy ? 'Private' : 'Public'}</b></Form.Label>
               <Form.Control
                 name="privacy"
                 type="checkbox"
+                class="checkbox"
                 checked={this.props.user.privacy}
                 onChange={this.onHandlePrivacyChange}
               />
             </Form.Group>
           </Form>
+          <hr />
           <h3>Change Password</h3>
           <Form onSubmit={this.onChangePassword}>
             <Form.Group controlId="oldPassword">

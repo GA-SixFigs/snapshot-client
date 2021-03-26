@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import Card from 'react-bootstrap/Card'
-import { Button } from 'react-bootstrap'
 //  impoort out axios request to get all mocies
 import { pictureIndex } from '../api/Pictures'
 class PictureIndex extends Component {
@@ -29,7 +28,7 @@ class PictureIndex extends Component {
       .catch(error => {
         msgAlert({
           heading: 'Failed Loading Pictures ',
-          message: 'Could not load pictures with error' + error.messge,
+          message: 'Could not load pictures with error' + error.message,
           variant: 'danger'
         })
       })
@@ -48,10 +47,9 @@ class PictureIndex extends Component {
         return (
           <Link to={`/pictures/${picture._id}`} key={picture._id}>
             <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
-              <Card.Img varient='top' clasName='img' src={picture.url} style={{ height: 200 }}/>
-              <Card.Body>
-                <Button variant="primary" >View Photo</Button>
-
+              <Card.Img varient='top' className='img' src={picture.url} style={{ height: 200 }}/>
+              <Card.Body className="card-body">
+                <button className="upButton">View Photo</button>
               </Card.Body>
             </Card>
           </Link>
