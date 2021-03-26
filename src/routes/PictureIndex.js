@@ -59,8 +59,8 @@ class PictureIndex extends Component {
     // ))
     const picturesJSX = pictures.map(picture => (
       <Link to={`/pictures/${picture._id}`} key={picture._id}>
-        <Card key={picture.id} style={{ width: '18rem' }}>
-          <Card.Img varient='top' src={picture.url} />
+        <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
+          <Card.Img varient='top' clasName='img' src={picture.url} style={{ height: 200 }}/>
           <Card.Body>
             <Card.Title>{picture.title}</Card.Title>
             <Card.Text>{picture.caption}</Card.Text>
@@ -72,7 +72,9 @@ class PictureIndex extends Component {
     const cardContanierLayout = {
       display: ' flex',
       justifyContent: 'Center',
-      flexFlow: 'row wrap'
+      flexFlow: 'row wrap',
+      border: 'solid'
+
     }
     // return (
     //   <div className="row">

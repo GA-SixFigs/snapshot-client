@@ -4,7 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { pictureShow, pictureDelete } from './../api/Pictures'
-
+import Button from 'react-bootstrap/Button'
 // 2. Class
 class ShowPicture extends Component {
   constructor (props) {
@@ -85,13 +85,12 @@ class ShowPicture extends Component {
       pictureJsx = <p>Loading...</p>
     } else {
       pictureJsx = (
-        <div>
+        <div >
           <img src={picture.url}/>
-          <button onClick={this.deletePicture}>Delete Me</button>
+          <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
         </div>
       )
     }
-
     return (
       <Fragment>
         <h1>Just One Picture:</h1>
