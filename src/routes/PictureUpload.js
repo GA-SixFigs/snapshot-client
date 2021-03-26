@@ -22,7 +22,7 @@ const PictureUpload = ({ user, msgAlert }) => {
   }
 
   const handleTagChange = event => {
-    const str = event.target.value.slice(1)
+    const str = event.target.value
     console.log(str)
     setTag(str)
   }
@@ -82,7 +82,7 @@ const PictureUpload = ({ user, msgAlert }) => {
             <Form.Control
               type="text"
               name="tag"
-              value={'#' + tag}
+              value={tag}
               placeholder="Enter Tag"
               onChange={handleTagChange}
             />
