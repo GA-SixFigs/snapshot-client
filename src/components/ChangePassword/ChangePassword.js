@@ -28,6 +28,7 @@ class ChangePassword extends Component {
         privacy: !prevState.privacy
       }
     })
+    this.props.history.push('/home')
   }
 
   onChangePassword = event => {

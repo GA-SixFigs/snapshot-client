@@ -24,6 +24,15 @@ export const pictureIndex = user => {
   })
 }
 
+export const galleryNoUser = () => {
+  return axios({
+    url: apiUrl + '/gallery',
+    method: 'GET'
+    // include an authorization header, that includes our user's token
+    // so the API knows who to sign out
+  })
+}
+
 export const pictureShow = (id) => {
   return axios({
     url: apiUrl + '/pictures/' + id,

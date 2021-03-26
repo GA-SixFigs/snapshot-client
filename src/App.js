@@ -13,6 +13,7 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import UserImages from './components/Home/UserImages'
+import Gallery from './components/Home/Gallery'
 
 import PictureIndex from './routes/PictureIndex'
 import PictureShow from './routes/PictureShow'
@@ -91,6 +92,9 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+          <Route path='/gallery' render={() => (
+            <Gallery msgAlert={this.msgAlert} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
