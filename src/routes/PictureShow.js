@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import moment from 'moment'
 // import Form from 'react-bootstrap/Form'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
@@ -136,7 +137,7 @@ class ShowPicture extends Component {
             <h5>Owner: {picture.ownerName}</h5>
             <h5>Caption: {picture.caption}</h5>
             <h5>Tag: {picture.tag}</h5>
-            <h5>Created: {picture.createdAt}</h5>
+            <h5>Created: {moment(picture.createdAt).format('ddd, hA ')}</h5>
             <br />
             <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
             <br />
