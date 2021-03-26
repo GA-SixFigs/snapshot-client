@@ -40,12 +40,20 @@ class PictureIndex extends Component {
         <Spinner animation="grow" varient='primary'/>
       )
     }
+    
     const picturesJSX = pictures.map(picture => (
-      <Link to={`/pictures/${picture._id}`} key={picture._id}>
-        <li>
-          <img className='display-image' src={picture.url}/>
-        </li>
-      </Link>
+      <div key={picture._id}>
+        Uploaded by: {picture.ownerName}
+        <Link to={`/pictures/${picture._id}`} key={picture._id}>
+          <ul>
+            <br />
+            <img src={picture.url} className='display-image'/>
+            <br />
+            Caption: {picture.caption}
+          </ul>
+        </Link>
+        #{picture.tag}
+      </div>
     ))
 
     return (

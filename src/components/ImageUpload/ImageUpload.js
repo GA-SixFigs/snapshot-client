@@ -12,6 +12,7 @@ import Spinner from 'react-bootstrap/Spinner'
 
 const ImageUpload = ({ user, msgAlert }) => {
   const [caption, setCaption] = useState('')
+  const [tag, setTag] = useState('')
   const [image, setImage] = useState(null)
   const [loading, setLoading] = useState(false)
   const [imageURL, setImageURL] = useState(null)
@@ -20,10 +21,18 @@ const ImageUpload = ({ user, msgAlert }) => {
     setCaption(event.target.value)
   }
 
+  const handleTagChange = event => {
+    const str = event.target.value.slice(1)
+    console.log(str)
+    setTag(str)
+  }
+
   const handleImageSubmit = event => {
     event.preventDefault()
     const data = new FormData()
     data.append('picture', image)
+    data.append('caption', caption)
+    data.append('tag', tag)
     setLoading(true)
     pictureCreate(user, data)
       .then(response => {
@@ -52,6 +61,7 @@ const ImageUpload = ({ user, msgAlert }) => {
         <Form onSubmit={handleImageSubmit}>
           <Form.Group controlId="image">
             <FormFile
+              required
               id="upload-file-input"
               label="Upload File Here"
               onChange={handleImageAdd}
@@ -67,6 +77,16 @@ const ImageUpload = ({ user, msgAlert }) => {
               onChange={handleCaptionChange}
             />
           </Form.Group>
+          <Form.Group controlId="caption">
+            <Form.Label>Tag</Form.Label>
+            <Form.Control
+              type="text"
+              name="tag"
+              value={'#' + tag}
+              placeholder="Enter Tag"
+              onChange={handleTagChange}
+            />
+          </Form.Group>
           <Button
             variant="primary"
             type="submit"
@@ -75,7 +95,7 @@ const ImageUpload = ({ user, msgAlert }) => {
           </Button>
         </Form>
       </div>
-      <Image src={imageURL} thumbnail/>
+      {imageURL && <Image src={imageURL} thumbnail/>}
     </div>
   )
 }
