@@ -50,11 +50,8 @@ class PictureIndex extends Component {
             <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
               <Card.Img varient='top' clasName='img' src={picture.url} style={{ height: 200 }}/>
               <Card.Body>
-
-                <Card.Text>{picture.caption}</Card.Text>
-                <Card.Title>{picture.tag}</Card.Title>
-
                 <Button variant="primary" >View Photo</Button>
+
               </Card.Body>
             </Card>
           </Link>

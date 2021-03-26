@@ -1,5 +1,5 @@
 
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button'
@@ -132,6 +132,10 @@ class ShowPicture extends Component {
         <div>
           <br />
           <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
+          <h5>Owner: {picture.ownerName}</h5>
+          <h5>Caption: {picture.caption}</h5>
+          <h5>Tag: {picture.tag}</h5>
+          <h5>Created: {picture.createdAt}</h5>
           <br />
           <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
           <br />
@@ -145,11 +149,19 @@ class ShowPicture extends Component {
         </div>
       )
     }
+    const showLayout = {
+      display: ' flex',
+      justifyContent: 'Center',
+      flexFlow: 'row wrap',
+      border: 'solid'
+    }
     return (
-      <Fragment>
+      <div>
         <h1>Just One Picture:</h1>
-        {pictureJsx}
-      </Fragment>
+        <div style={showLayout}>
+          {pictureJsx}
+        </div>
+      </div>
     )
   }
 }
