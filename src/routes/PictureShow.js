@@ -140,11 +140,11 @@ class ShowPicture extends Component {
           <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
           <br />
           <br />
-          <form onSubmit={this.updatePicture}>
+          <form className="updateForm" onSubmit={this.updatePicture}>
             <input type="text" name="caption" placeholder='New Caption Here' value={picture.caption} onChange={this.handleChange}/>
             <br />
             <input type="text" name="tag" placeholder='New tags here' value ={picture.tag} onChange={this.handleChange}/>
-            <button type="submit">Update</button>
+            <button className="upButton" type="submit">Update</button>
           </form>
         </div>
       )
