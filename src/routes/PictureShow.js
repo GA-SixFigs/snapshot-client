@@ -1,9 +1,12 @@
 
 import React, { Component, Fragment } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
+
+// import Button from 'react-bootstrap/Button'
+// import Form from 'react-bootstrap/Form'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { pictureShow, pictureDelete } from './../api/Pictures'
+import { pictureShow, pictureDelete, pictureUpdate } from './../api/Pictures'
 
 // 2. Class
 class ShowPicture extends Component {
@@ -14,7 +17,9 @@ class ShowPicture extends Component {
       picture: null,
 
       // Delete boolean to manage if we've deleted this book
-      deleted: false
+      deleted: false,
+
+      updated: false
     }
 
     // If we don't use arrow functions, then we need to bind the `this` scope
@@ -70,38 +75,66 @@ class ShowPicture extends Component {
       })
   }
 
-  render () {
-    // create a local variable `book` and set it's value
-    // to the value of the `book` key on `this.state`
-    const { picture, deleted } = this.state
-    // 2 scenarios: loading, book to show
-
-    let pictureJsx = ''
-
-    if (deleted) {
-      // if deleted is true, we can redirect
-      return <Redirect to="/pictures"/>
-    } else if (!picture) {
-      pictureJsx = <p>Loading...</p>
-    } else {
-      pictureJsx = (
-        <div>
-          Uploaded by: {picture.ownerName}
-          <br />
-          <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
-          <br />
-          <button onClick={this.deletePicture}>Delete Me</button>
-        </div>
-      )
+    updatePicture = () => {
+      const { msgAlert, user, match } = this.prop
+      console.log(this.props)
+      pictureUpdate(user, match.params.id)
+        .then(res => this.setState({ updated: true }))
+        .then(() => msgAlert({
+          heading: 'Updated Picture Successfully',
+          message: 'Nice! You updated your Image!.',
+          variant: 'success'
+        }))
+        .catch(error => {
+          msgAlert({
+            heading: 'Failed to Update Picture',
+            message: 'Could not udate picture with error:' + error.messge,
+            variant: 'danger'
+          })
+        })
     }
 
-    return (
-      <Fragment>
-        <h1>Just One Picture:</h1>
-        {pictureJsx}
-      </Fragment>
-    )
-  }
+    render () {
+      // create a local variable `book` and set it's value
+      // to the value of the `book` key on `this.state`
+      const { picture, deleted, updated } = this.state
+      // 2 scenarios: loading, book to show
+
+      let pictureJsx = ''
+
+      if (deleted) {
+        // if deleted is true, we can redirect
+        return <Redirect to="/pictures"/>
+      } else if (!picture) {
+        pictureJsx = <p>Loading...</p>
+      } else if (updated) {
+        return <Redirect to="/pictures/:id"/>
+      } else {
+        pictureJsx = (
+          <div>
+            Uploaded by: {picture.ownerName}
+            <br />
+            <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
+            <br />
+            <button onClick={this.deletePicture}>Delete Me</button>
+            <br />
+            <br />
+            <form>
+              <input type="text" name="caption" placeholder='New Caption Here'/>
+              <br />
+              <input type="text" name="tag" placeholder='New tags here'/>
+            </form>
+            <button onClick={this.updatePicture}>Update</button>
+          </div>
+        )
+      }
+      return (
+        <Fragment>
+          <h1>Just One Picture:</h1>
+          {pictureJsx}
+        </Fragment>
+      )
+    }
 }
 
 // 3. Exports
