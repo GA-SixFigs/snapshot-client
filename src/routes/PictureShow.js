@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
-
+import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 // import Form from 'react-bootstrap/Form'
 // import axios from 'axios'
@@ -129,23 +129,25 @@ class ShowPicture extends Component {
       return <Redirect to="/pictures/"/>
     } else {
       pictureJsx = (
-        <div>
-          <br />
-          <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
-          <h5>Owner: {picture.ownerName}</h5>
-          <h5>Caption: {picture.caption}</h5>
-          <h5>Tag: {picture.tag}</h5>
-          <h5>Created: {picture.createdAt}</h5>
-          <br />
-          <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
-          <br />
-          <br />
-          <form className="updateForm" onSubmit={this.updatePicture}>
-            <input type="text" name="caption" placeholder='New Caption Here' value={picture.caption} onChange={this.handleChange}/>
+        <div className="row">
+          <div className="col-sm-10 col-md-8 mx-auto mt-5">
             <br />
-            <input type="text" name="tag" placeholder='New tags here' value ={picture.tag} onChange={this.handleChange}/>
-            <button className="upButton" type="submit">Update</button>
-          </form>
+            <Image src={picture.url} key={picture._id}thumbnail/>
+            <h5>Owner: {picture.ownerName}</h5>
+            <h5>Caption: {picture.caption}</h5>
+            <h5>Tag: {picture.tag}</h5>
+            <h5>Created: {picture.createdAt}</h5>
+            <br />
+            <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
+            <br />
+            <br />
+            <form className="updateForm" onSubmit={this.updatePicture}>
+              <input type="text" name="caption" placeholder='New Caption Here' value={picture.caption} onChange={this.handleChange}/>
+              <br />
+              <input type="text" name="tag" placeholder='New tags here' value ={picture.tag} onChange={this.handleChange}/>
+              <button className="upButton" type="submit">Update</button>
+            </form>
+          </div>
         </div>
       )
     }
@@ -157,7 +159,6 @@ class ShowPicture extends Component {
     }
     return (
       <div>
-        <h1>Just One Picture:</h1>
         <div style={showLayout}>
           {pictureJsx}
         </div>
