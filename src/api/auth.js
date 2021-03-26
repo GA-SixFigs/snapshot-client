@@ -55,3 +55,17 @@ export const changePassword = (passwords, user) => {
     }
   })
 }
+
+export const changePrivacy = (user, privacy) => {
+  console.log(user)
+  return axios({
+    url: apiUrl + '/change-privacy',
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    },
+    data: {
+      privacy: privacy
+    }
+  })
+}

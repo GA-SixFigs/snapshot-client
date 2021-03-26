@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
+import { changePrivacy } from './api/auth'
+
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
@@ -20,7 +22,8 @@ class App extends Component {
     super(props)
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+      privacy: null
     }
   }
 
@@ -39,6 +42,18 @@ class App extends Component {
     this.setState((state) => {
       return { msgAlerts: [...state.msgAlerts, { heading, message, variant, id }] }
     })
+  }
+
+  handlePrivacyChange = event => {
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    changePrivacy(this.state.user, value)
+      .then(response => this.setState(
+        prevState => {
+          const user = { ...prevState.user }
+          user.privacy = response.data.user.privacy
+          return { user }
+        }))
   }
 
   render () {
@@ -67,8 +82,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/settings' handlePrivacyChange={this.handlePrivacyChange} render={() => (
+            <ChangePassword msgAlert={this.msgAlert} user={user} handlePrivacyChange={this.handlePrivacyChange}/>
           )} />
           <AuthenticatedRoute user={user} exact path='/pictures' render={() => (
             <PictureIndex msgAlert={this.msgAlert} user={user} />

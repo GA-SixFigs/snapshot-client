@@ -56,7 +56,6 @@ export const pictureUpdate = (id, picture, user) => {
 }
 
 export const userPictureShow = (user) => {
-  console.log(user, 'from my api calls')
   return axios({
     url: apiUrl + '/home',
     method: 'Get',
