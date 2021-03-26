@@ -89,7 +89,7 @@ class ShowPicture extends Component {
           <br />
           <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
           <br />
-         <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
+          <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
 
         </div>
       )
