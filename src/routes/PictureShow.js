@@ -4,7 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { pictureShow, pictureDelete } from './../api/Pictures'
-
+import Button from 'react-bootstrap/Button'
 // 2. Class
 class ShowPicture extends Component {
   constructor (props) {
@@ -57,13 +57,13 @@ class ShowPicture extends Component {
       .then(res => this.setState({ deleted: true }))
 
       .then(() => msgAlert({
-        heading: 'Showing Picture Successfully',
-        message: 'Showing Created Picture.',
+        heading: 'Deleted Picture Successfully',
+        message: 'Deleted Picture.',
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Failed Showing picture',
+          heading: 'Failed Deleting picture',
           message: 'Could not create picture with error:' + error.messge,
           variant: 'danger'
         })
@@ -75,7 +75,7 @@ class ShowPicture extends Component {
     // to the value of the `book` key on `this.state`
     const { picture, deleted } = this.state
     // 2 scenarios: loading, book to show
-
+    // console.log(picture + 'this is my picture obj')
     let pictureJsx = ''
 
     if (deleted) {
@@ -86,15 +86,14 @@ class ShowPicture extends Component {
     } else {
       pictureJsx = (
         <div>
-          Uploaded by: {picture.ownerName}
           <br />
           <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
           <br />
-          <button onClick={this.deletePicture}>Delete Me</button>
+         <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
+
         </div>
       )
     }
-
     return (
       <Fragment>
         <h1>Just One Picture:</h1>

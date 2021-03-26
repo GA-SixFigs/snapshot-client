@@ -5,17 +5,17 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#pictures">Gallery</Nav.Link>
-    <Nav.Link href="#picture-upload">Image Upload</Nav.Link>
-    <Nav.Link href="#settings">User Settings</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link className="link-text" href="#pictures">Gallery</Nav.Link>
+    <Nav.Link className="link-text" href="#picture-upload">Image Upload</Nav.Link>
+    <Nav.Link className="link-text" href="#change-password">Change Password</Nav.Link>
+    <Nav.Link className="link-text" href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
 )
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    <Nav.Link className="link-text" href="#sign-up">Sign Up</Nav.Link>
+    <Nav.Link className="link-text" href="#sign-in">Sign In</Nav.Link>
   </Fragment>
 )
 
@@ -30,6 +30,7 @@ const Header = ({ user }) => (
     <Navbar.Brand href="#home">
       SnapShot
     </Navbar.Brand>
+    <img src="logo-withoutbackground1.png" style={{ height: '125px', width: '160px' }}/>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
