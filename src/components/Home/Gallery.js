@@ -45,14 +45,13 @@ class Gallery extends Component {
     const picturesJSX = pictures.map(picture => {
       if (picture !== 'private') {
         return (
-          <Link to={`/pictures/${picture._id}`} key={picture._id}>
+          <div key={picture._id}>
             <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
               <Card.Img varient='top' className='img' src={picture.url} style={{ height: 200 }}/>
               <Card.Body className="card-body">
-                <button className="upButton">View Photo</button>
               </Card.Body>
             </Card>
-          </Link>
+          </div>
         )
       }
     })
