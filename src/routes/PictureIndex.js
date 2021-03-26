@@ -40,13 +40,14 @@ class PictureIndex extends Component {
         <Spinner animation="grow" varient='primary'/>
       )
     }
+    
     const picturesJSX = pictures.map(picture => (
       <div key={picture._id}>
         Uploaded by: {picture.ownerName}
         <Link to={`/pictures/${picture._id}`} key={picture._id}>
           <ul>
             <br />
-            <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
+            <img src={picture.url} className='display-image'/>
             <br />
             Caption: {picture.caption}
           </ul>
