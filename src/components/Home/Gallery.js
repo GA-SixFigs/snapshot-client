@@ -73,7 +73,10 @@ class Gallery extends Component {
     // )
     return (
       <div>
-        <h3>Picture Gallery</h3>
+        <div className="centered">
+          <h3>Welcome to SnapShot</h3>
+          <h5>Sign in or Sign up to add Pictures</h5>
+        </div>
         <div style={cardContanierLayout}>
           { picturesJSX }
         </div>
