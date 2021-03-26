@@ -1,10 +1,14 @@
 
 import React, { Component, Fragment } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
+
+import Button from 'react-bootstrap/Button'
+// import Form from 'react-bootstrap/Form'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { pictureShow, pictureDelete } from './../api/Pictures'
-import Button from 'react-bootstrap/Button'
+
+import { pictureShow, pictureDelete, pictureUpdate } from './../api/Pictures'
+
 // 2. Class
 class ShowPicture extends Component {
   constructor (props) {
@@ -14,7 +18,9 @@ class ShowPicture extends Component {
       picture: null,
 
       // Delete boolean to manage if we've deleted this book
-      deleted: false
+      deleted: false,
+
+      updated: false
     }
 
     // If we don't use arrow functions, then we need to bind the `this` scope
@@ -70,10 +76,46 @@ class ShowPicture extends Component {
       })
   }
 
+  handleChange = (event) => {
+    // BAD: will override the author
+    // this.setState({ book: { title: 'value'} })
+    console.log(event)
+    // Allows us to be able to access event.target
+    // inside of the setState callback function
+    event.persist()
+    this.setState(oldState => {
+      // variable for the value & the name of the input
+      const value = event.target.value
+      const name = event.target.name
+      const updatedField = { [name]: value }
+      return { picture: { ...oldState.picture, ...updatedField } }
+    })
+  }
+
+  updatePicture = (event) => {
+    const { msgAlert, user, match } = this.props
+    console.log(this.props)
+    event.preventDefault()
+    pictureUpdate(match.params.id, this.state.picture, user)
+      .then(res => this.setState({ updated: true }))
+      .then(() => msgAlert({
+        heading: 'Updated Picture Successfully',
+        message: 'Nice! You updated your Image!.',
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Failed to Update Picture',
+          message: 'Could not udate picture with error:' + error.messge,
+          variant: 'danger'
+        })
+      })
+  }
+
   render () {
     // create a local variable `book` and set it's value
     // to the value of the `book` key on `this.state`
-    const { picture, deleted } = this.state
+    const { picture, deleted, updated } = this.state
     // 2 scenarios: loading, book to show
     // console.log(picture + 'this is my picture obj')
     let pictureJsx = ''
@@ -83,6 +125,8 @@ class ShowPicture extends Component {
       return <Redirect to="/pictures"/>
     } else if (!picture) {
       pictureJsx = <p>Loading...</p>
+    } else if (updated) {
+      return <Redirect to="/pictures/"/>
     } else {
       pictureJsx = (
         <div>
@@ -90,7 +134,14 @@ class ShowPicture extends Component {
           <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
           <br />
           <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
-
+          <br />
+          <br />
+          <form onSubmit={this.updatePicture}>
+            <input type="text" name="caption" placeholder='New Caption Here' value={picture.caption} onChange={this.handleChange}/>
+            <br />
+            <input type="text" name="tag" placeholder='New tags here' value ={picture.tag} onChange={this.handleChange}/>
+            <button type="submit">Update</button>
+          </form>
         </div>
       )
     }
