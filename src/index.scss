@@ -6,22 +6,25 @@ $third:#00233A;
 
 body {
   font-family: 'Zilla Slab', serif;;
+  height: 60%;
   margin: 0;
   padding: 0;
-  height: 60%;
 }
 
 .cardStyle {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
   max-height: 300px;
   max-width: 300px;
-  margin: 20px auto;
   padding: 20px;
 }
 
 .img {
-  width: 200px;
   height: 25vw;
   object-fit: cover;
+  width: 200px;
 }
 
 .display-image{
@@ -33,7 +36,13 @@ body {
   border-radius: 25px;
 }
 .upButton {
-  border-radius: 25px;
+  border-radius: 15px;
   background-color: $primary;
+  margin: auto;
   color: white;
+}
+
+.card-body{
+  display: flex;
+  justify-content: center;
 }
