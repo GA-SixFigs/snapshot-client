@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
+import Card from 'react-bootstrap/Card'
+import { Button } from 'react-bootstrap'
 //  impoort out axios request to get all mocies
 import { pictureIndex } from '../api/Pictures'
 class PictureIndex extends Component {
@@ -40,21 +42,53 @@ class PictureIndex extends Component {
         <Spinner animation="grow" varient='primary'/>
       )
     }
+    // const picturesJSX = pictures.map(picture => (
+    //   <Link to={`/pictures/${picture._id}`} key={picture._id}>
+    //     <Container flex>
+    //       <Card bg="secondary" text="" style={{ width: '18rem' }}>
+    //         <Card.Img variant="top" src={picture.url}/>
+    //         <Card.Body>
+    //           <Card.Title>{picture.tag}</Card.Title>
+    //           <Card.Text>
+    //           </Card.Text>
+    //           <Button variant="primary" >View Photo</Button>
+    //         </Card.Body>
+    //       </Card>
+    //     </Container>
+    //   </Link>
+    // ))
     const picturesJSX = pictures.map(picture => (
       <Link to={`/pictures/${picture._id}`} key={picture._id}>
-        <li>
-          <img src={picture.url}/>
-        </li>
+        <Card key={picture.id} style={{ width: '18rem' }}>
+          <Card.Img varient='top' src={picture.url} />
+          <Card.Body>
+            <Card.Title>{picture.title}</Card.Title>
+            <Card.Text>{picture.caption}</Card.Text>
+            <Button variant="primary" >View Photo</Button>
+          </Card.Body>
+        </Card>
       </Link>
     ))
-
+    const cardContanierLayout = {
+      display: ' flex',
+      justifyContent: 'Center',
+      flexFlow: 'row wrap'
+    }
+    // return (
+    //   <div className="row">
+    //     <div className="col-sm-10 col-md-8 mx-auto mt-5">
+    //       <h3>Picture Gallery</h3>
+    //       <ul>
+    //         {picturesJSX}
+    //       </ul>
+    //     </div>
+    //   </div>
+    // )
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Picture Gallery</h3>
-          <ul>
-            {picturesJSX}
-          </ul>
+      <div>
+        <h3>Picture Gallery</h3>
+        <div style={cardContanierLayout}>
+          { picturesJSX }
         </div>
       </div>
     )
