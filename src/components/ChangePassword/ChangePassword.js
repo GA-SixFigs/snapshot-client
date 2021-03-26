@@ -13,20 +13,32 @@ class ChangePassword extends Component {
 
     this.state = {
       oldPassword: '',
-      newPassword: ''
+      newPassword: '',
+      privacy: this.props.user.privacy
     }
+  }
+
+  componentDidMount () {
+    console.log(this.state.privacy)
   }
 
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
 
+  onHandlePrivacyChange = (event) => {
+    this.props.handlePrivacyChange(event)
+    this.setState(prevState => {
+      return {
+        privacy: !prevState.privacy
+      }
+    })
+  }
+
   onChangePassword = event => {
     event.preventDefault()
-
     const { msgAlert, history, user } = this.props
     console.log(user, 'my user')
-
     changePassword(this.state, user)
       .then(() => msgAlert({
         heading: 'Change Password Success',
@@ -50,6 +62,18 @@ class ChangePassword extends Component {
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
+          <h3>User Privacy</h3>
+          <Form>
+            <Form.Group controlId="privacy">
+              <Form.Label>Privacy Settings: {this.state.privacy ? 'private' : 'not private'}</Form.Label>
+              <Form.Control
+                name="privacy"
+                type="checkbox"
+                checked={this.props.user.privacy}
+                onChange={this.onHandlePrivacyChange}
+              />
+            </Form.Group>
+          </Form>
           <h3>Change Password</h3>
           <Form onSubmit={this.onChangePassword}>
             <Form.Group controlId="oldPassword">

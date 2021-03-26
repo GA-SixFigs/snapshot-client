@@ -1,10 +1,29 @@
+$primary:#fb6376;
+$secondary:#1D7A8C;
+$third:#00233A;
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap');
 
 body {
-  font-family: sans-serif;
+  font-family: 'Zilla Slab', serif;;
   margin: 0;
   padding: 0;
+  height: 60%;
 }
+
+.cardStyle {
+  max-height: 300px;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.img {
+  width: 200px;
+  height: 25vw;
+  object-fit: cover;
+}
+
 .display-image{
   max-width: 200px;
   max-height: 200px;
