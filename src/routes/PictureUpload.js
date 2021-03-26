@@ -23,7 +23,6 @@ const PictureUpload = ({ user, msgAlert }) => {
 
   const handleTagChange = event => {
     const str = event.target.value
-    console.log(str)
     setTag(str)
   }
 
@@ -39,7 +38,13 @@ const PictureUpload = ({ user, msgAlert }) => {
         setImageURL(response.data.picture.url)
       })
       .then(response => setLoading(false))
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Failed Uploadt Picture ',
+          message: 'Could not load pictures with error' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   const handleImageAdd = event => {

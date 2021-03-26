@@ -57,7 +57,6 @@ export const changePassword = (passwords, user) => {
 }
 
 export const changePrivacy = (user, privacy) => {
-  console.log(user)
   return axios({
     url: apiUrl + '/change-privacy',
     method: 'PATCH',

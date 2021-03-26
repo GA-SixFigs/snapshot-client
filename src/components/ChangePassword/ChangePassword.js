@@ -17,11 +17,6 @@ class ChangePassword extends Component {
       privacy: this.props.user.privacy
     }
   }
-
-  componentDidMount () {
-    console.log(this.state.privacy)
-  }
-
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
@@ -38,7 +33,6 @@ class ChangePassword extends Component {
   onChangePassword = event => {
     event.preventDefault()
     const { msgAlert, history, user } = this.props
-    console.log(user, 'my user')
     changePassword(this.state, user)
       .then(() => msgAlert({
         heading: 'Change Password Success',
@@ -69,7 +63,7 @@ class ChangePassword extends Component {
               <Form.Control
                 name="privacy"
                 type="checkbox"
-                class="checkbox"
+                className="checkbox"
                 checked={this.props.user.privacy}
                 onChange={this.onHandlePrivacyChange}
               />

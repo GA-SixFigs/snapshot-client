@@ -34,7 +34,6 @@ class ShowPicture extends Component {
   componentDidMount () {
     const { msgAlert, match } = this.props
 
-    console.log(this.props)
     pictureShow(match.params.id)
     //  set the createdMovieId to the _id of the movie we got in the response data
       .then(res => this.setState({ picture: res.data.picture }))
@@ -57,8 +56,6 @@ class ShowPicture extends Component {
   deletePicture = () => {
     // axios.delete(apiUrl + '/books/' + this.props.match.params.id)
     const { msgAlert, user, match } = this.props
-
-    console.log(this.props)
     pictureDelete(user, match.params.id)
     //  set the createdMovieId to the _id of the movie we got in the response data
       .then(res => this.setState({ deleted: true }))
@@ -80,7 +77,6 @@ class ShowPicture extends Component {
   handleChange = (event) => {
     // BAD: will override the author
     // this.setState({ book: { title: 'value'} })
-    console.log(event)
     // Allows us to be able to access event.target
     // inside of the setState callback function
     event.persist()
@@ -95,7 +91,6 @@ class ShowPicture extends Component {
 
   updatePicture = (event) => {
     const { msgAlert, user, match } = this.props
-    console.log(this.props)
     event.preventDefault()
     pictureUpdate(match.params.id, this.state.picture, user)
       .then(res => this.setState({ updated: true }))
@@ -118,7 +113,6 @@ class ShowPicture extends Component {
     // to the value of the `book` key on `this.state`
     const { picture, deleted, updated } = this.state
     // 2 scenarios: loading, book to show
-    // console.log(picture + 'this is my picture obj')
     let pictureJsx = ''
 
     if (deleted) {
