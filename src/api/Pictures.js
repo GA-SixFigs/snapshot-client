@@ -54,3 +54,14 @@ export const pictureUpdate = (id, picture, user) => {
     data: { picture }
   })
 }
+
+export const userPictureShow = (user) => {
+  console.log(user, 'from my api calls')
+  return axios({
+    url: apiUrl + '/home',
+    method: 'Get',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+}

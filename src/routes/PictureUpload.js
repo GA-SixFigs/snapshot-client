@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
 // import messages from '../AutoDismissAlert/messages'
-import { pictureCreate } from '../../api/Pictures'
+import { pictureCreate } from './../api/Pictures'
 
 import Form from 'react-bootstrap/Form'
 import FormFile from 'react-bootstrap/FormFile'
@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
 
-const ImageUpload = ({ user, msgAlert }) => {
+const PictureUpload = ({ user, msgAlert }) => {
   const [caption, setCaption] = useState('')
   const [tag, setTag] = useState('')
   const [image, setImage] = useState(null)
@@ -100,4 +100,4 @@ const ImageUpload = ({ user, msgAlert }) => {
   )
 }
 
-export default withRouter(ImageUpload)
+export default withRouter(PictureUpload)
