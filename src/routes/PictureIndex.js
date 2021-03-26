@@ -40,7 +40,6 @@ class PictureIndex extends Component {
         <Spinner animation="grow" varient='primary'/>
       )
     }
-    
     const picturesJSX = pictures.map(picture => (
       <div key={picture._id}>
         Uploaded by: {picture.ownerName}
