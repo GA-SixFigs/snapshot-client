@@ -28,7 +28,7 @@ class PictureIndex extends Component {
       .catch(error => {
         msgAlert({
           heading: 'Failed Loading Pictures ',
-          message: 'Could not load pictures with error' + error.messge,
+          message: 'Could not load pictures with error' + error.message,
           variant: 'danger'
         })
       })

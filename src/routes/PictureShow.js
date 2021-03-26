@@ -47,7 +47,7 @@ class ShowPicture extends Component {
       .catch(error => {
         msgAlert({
           heading: 'Failed Showing Picture',
-          message: 'Could not create picture with error:' + error.messge,
+          message: 'Could not show picture with error:' + error.message,
           variant: 'danger'
         })
       })
