@@ -21,7 +21,7 @@ class Gallery extends Component {
       .then(res => this.setState({ pictures: res.data.pictures }))
       .then(() => msgAlert({
         heading: 'Loaded Pictures Successfully',
-        message: 'Viewing all Pictures. Sign in to add one',
+        message: 'Viewing all Pictures. Sign in to add more!',
         variant: 'success'
       }))
       .catch(error => {
@@ -34,7 +34,6 @@ class Gallery extends Component {
   }
   render () {
     const { pictures } = this.state
-    //  if we dont have any movies yet show that we are loading them
     if (!pictures) {
       return (
         <Spinner animation="grow" varient='primary'/>
@@ -61,16 +60,6 @@ class Gallery extends Component {
       flexFlow: 'row wrap',
       border: 'solid'
     }
-    // return (
-    //   <div className="row">
-    //     <div className="col-sm-10 col-md-8 mx-auto mt-5">
-    //       <h3>Picture Gallery</h3>
-    //       <ul>
-    //         {picturesJSX}
-    //       </ul>
-    //     </div>
-    //   </div>
-    // )
     return (
       <div>
         <div className="centered">

@@ -57,13 +57,13 @@ class App extends Component {
           return { user }
         }))
       .then(() => this.msgAlert({
-        heading: 'Change Password Success',
+        heading: 'Change Privacy Success',
         message: messages.privacyChangeSuccess,
         variant: 'success'
       }))
       .catch(error => {
         this.msgAlert({
-          heading: 'Change Password Failed with error: ' + error.message,
+          heading: 'Change Privacy Failed with error: ' + error.message,
           message: messages.privacyChangeFailure,
           variant: 'danger'
         })
