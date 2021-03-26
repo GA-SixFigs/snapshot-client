@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 import { changePrivacy } from './api/auth'
+import messages from './components/AutoDismissAlert/messages'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
@@ -54,6 +55,18 @@ class App extends Component {
           user.privacy = response.data.user.privacy
           return { user }
         }))
+      .then(() => this.msgAlert({
+        heading: 'Change Password Success',
+        message: messages.privacyChangeSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.msgAlert({
+          heading: 'Change Password Failed with error: ' + error.message,
+          message: messages.privacyChangeFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
