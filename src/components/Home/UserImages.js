@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 // import messages from '../AutoDismissAlert/messages'
 import { userPictureShow } from '../../api/Pictures'
@@ -19,7 +19,9 @@ const UserImages = ({ user, msgAlert }) => {
         <h4>My Pictures</h4>
         {pictures && pictures.map(picture => {
           return (
-            <Image src={picture.url} key={picture._id}thumbnail/>
+            <Link to={`/pictures/${picture._id}`} key={picture._id}>
+              <Image src={picture.url} key={picture._id}thumbnail/>
+            </Link>
           )
         })}
       </div>
