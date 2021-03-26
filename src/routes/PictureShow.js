@@ -75,66 +75,83 @@ class ShowPicture extends Component {
       })
   }
 
-    updatePicture = () => {
-      const { msgAlert, user, match } = this.prop
-      console.log(this.props)
-      pictureUpdate(user, match.params.id)
-        .then(res => this.setState({ updated: true }))
-        .then(() => msgAlert({
-          heading: 'Updated Picture Successfully',
-          message: 'Nice! You updated your Image!.',
-          variant: 'success'
-        }))
-        .catch(error => {
-          msgAlert({
-            heading: 'Failed to Update Picture',
-            message: 'Could not udate picture with error:' + error.messge,
-            variant: 'danger'
-          })
+  handleChange = (event) => {
+    // BAD: will override the author
+    // this.setState({ book: { title: 'value'} })
+    console.log(event)
+    // Allows us to be able to access event.target
+    // inside of the setState callback function
+    event.persist()
+    this.setState(oldState => {
+      // variable for the value & the name of the input
+      const value = event.target.value
+      const name = event.target.name
+      const updatedField = { [name]: value }
+      return { picture: { ...oldState.picture, ...updatedField } }
+    })
+  }
+
+  updatePicture = (event) => {
+    const { msgAlert, user, match } = this.props
+    console.log(this.props)
+    event.preventDefault()
+    pictureUpdate(match.params.id, this.state.picture, user)
+      .then(res => this.setState({ updated: true }))
+      .then(() => msgAlert({
+        heading: 'Updated Picture Successfully',
+        message: 'Nice! You updated your Image!.',
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Failed to Update Picture',
+          message: 'Could not udate picture with error:' + error.messge,
+          variant: 'danger'
         })
-    }
+      })
+  }
 
-    render () {
-      // create a local variable `book` and set it's value
-      // to the value of the `book` key on `this.state`
-      const { picture, deleted, updated } = this.state
-      // 2 scenarios: loading, book to show
+  render () {
+    // create a local variable `book` and set it's value
+    // to the value of the `book` key on `this.state`
+    const { picture, deleted, updated } = this.state
+    // 2 scenarios: loading, book to show
 
-      let pictureJsx = ''
+    let pictureJsx = ''
 
-      if (deleted) {
-        // if deleted is true, we can redirect
-        return <Redirect to="/pictures"/>
-      } else if (!picture) {
-        pictureJsx = <p>Loading...</p>
-      } else if (updated) {
-        return <Redirect to="/pictures/:id"/>
-      } else {
-        pictureJsx = (
-          <div>
-            Uploaded by: {picture.ownerName}
+    if (deleted) {
+      // if deleted is true, we can redirect
+      return <Redirect to="/pictures"/>
+    } else if (!picture) {
+      pictureJsx = <p>Loading...</p>
+    } else if (updated) {
+      return <Redirect to="/pictures/"/>
+    } else {
+      pictureJsx = (
+        <div>
+          Uploaded by: {picture.ownerName}
+          <br />
+          <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
+          <br />
+          <button onClick={this.deletePicture}>Delete Me</button>
+          <br />
+          <br />
+          <form onSubmit={this.updatePicture}>
+            <input type="text" name="caption" placeholder='New Caption Here' value={picture.caption} onChange={this.handleChange}/>
             <br />
-            <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
-            <br />
-            <button onClick={this.deletePicture}>Delete Me</button>
-            <br />
-            <br />
-            <form>
-              <input type="text" name="caption" placeholder='New Caption Here'/>
-              <br />
-              <input type="text" name="tag" placeholder='New tags here'/>
-            </form>
-            <button onClick={this.updatePicture}>Update</button>
-          </div>
-        )
-      }
-      return (
-        <Fragment>
-          <h1>Just One Picture:</h1>
-          {pictureJsx}
-        </Fragment>
+            <input type="text" name="tag" placeholder='New tags here' value ={picture.tag} onChange={this.handleChange}/>
+            <button type="submit">Update</button>
+          </form>
+        </div>
       )
     }
+    return (
+      <Fragment>
+        <h1>Just One Picture:</h1>
+        {pictureJsx}
+      </Fragment>
+    )
+  }
 }
 
 // 3. Exports
