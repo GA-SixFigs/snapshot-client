@@ -43,19 +43,19 @@ class PictureIndex extends Component {
       )
     }
 
-  const picturesJSX = pictures.map(picture => {
+    const picturesJSX = pictures.map(picture => {
       if (picture !== 'private') {
         return (
-        <Link to={`/pictures/${picture._id}`} key={picture._id}>
-          <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
-            <Card.Img varient='top' clasName='img' src={picture.url} style={{ height: 200 }}/>
-            <Card.Body>
-              <Card.Title>{picture.title}</Card.Title>
-              <Card.Text>{picture.caption}</Card.Text>
-              <Button variant="primary" >View Photo</Button>
-            </Card.Body>
-          </Card>
-        </Link>
+          <Link to={`/pictures/${picture._id}`} key={picture._id}>
+            <Card bg='secondary' className="cardStyle" key={picture.id} style={{ width: '18rem' }}>
+              <Card.Img varient='top' clasName='img' src={picture.url} style={{ height: 200 }}/>
+              <Card.Body>
+                <Card.Text>{picture.caption}</Card.Text>
+                <Card.Title>{picture.tag}</Card.Title>
+                <Button variant="primary" >View Photo</Button>
+              </Card.Body>
+            </Card>
+          </Link>
         )
       }
     })
