@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+// import snapshotLogo from '../../../public/snapshotLogo.jpg'
 
 const authenticatedOptions = (
   <Fragment>
@@ -36,6 +37,7 @@ const Header = ({ user }) => (
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
+      <img src="snapshotLogo.jpg" style={{ height: '100px', width: '100px' }}/>
     </Navbar.Collapse>
   </Navbar>
 )
