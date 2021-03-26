@@ -28,7 +28,6 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#home">
-      SnapShot
     </Navbar.Brand>
     <img src="logo-withoutbackground1.png" style={{ height: '125px', width: '160px' }}/>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -38,7 +37,6 @@ const Header = ({ user }) => (
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
-      <img src="snapshotLogo.jpg" style={{ height: '100px', width: '100px' }}/>
     </Navbar.Collapse>
   </Navbar>
 )
