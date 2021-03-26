@@ -21,7 +21,7 @@ class Gallery extends Component {
       .then(res => this.setState({ pictures: res.data.pictures }))
       .then(() => msgAlert({
         heading: 'Loaded Pictures Successfully',
-        message: 'Viewing all Pictures. Click on one to see its page',
+        message: 'Viewing all Pictures. Sign in to add one',
         variant: 'success'
       }))
       .catch(error => {
