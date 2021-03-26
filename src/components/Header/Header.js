@@ -27,9 +27,8 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      SnapShot
     </Navbar.Brand>
-    <img src="logo-withoutbackground.png" style={{ height: '250px', width: '300px' }}/>
+    <img src="logo-withoutbackground1.png" style={{ height: '125px', width: '160px' }}/>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
