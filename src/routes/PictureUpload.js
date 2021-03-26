@@ -100,7 +100,13 @@ const PictureUpload = ({ user, msgAlert }) => {
           </Button>
         </Form>
       </div>
-      {imageURL && <Image src={imageURL} thumbnail/>}
+      {imageURL &&
+        <div className="row">
+          <div className="col-sm-10 col-md-8 mx-auto mt-5">
+            <Image src={imageURL} thumbnail/>
+          </div>
+        </div>
+      }
     </div>
   )
 }
