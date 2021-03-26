@@ -2,10 +2,11 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 // import Form from 'react-bootstrap/Form'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
+
 import { pictureShow, pictureDelete, pictureUpdate } from './../api/Pictures'
 
 // 2. Class
@@ -62,13 +63,13 @@ class ShowPicture extends Component {
       .then(res => this.setState({ deleted: true }))
 
       .then(() => msgAlert({
-        heading: 'Showing Picture Successfully',
-        message: 'Showing Created Picture.',
+        heading: 'Deleted Picture Successfully',
+        message: 'Deleted Picture.',
         variant: 'success'
       }))
       .catch(error => {
         msgAlert({
-          heading: 'Failed Showing picture',
+          heading: 'Failed Deleting picture',
           message: 'Could not create picture with error:' + error.messge,
           variant: 'danger'
         })
@@ -116,7 +117,7 @@ class ShowPicture extends Component {
     // to the value of the `book` key on `this.state`
     const { picture, deleted, updated } = this.state
     // 2 scenarios: loading, book to show
-
+    // console.log(picture + 'this is my picture obj')
     let pictureJsx = ''
 
     if (deleted) {
@@ -129,11 +130,10 @@ class ShowPicture extends Component {
     } else {
       pictureJsx = (
         <div>
-          Uploaded by: {picture.ownerName}
           <br />
           <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
           <br />
-          <button onClick={this.deletePicture}>Delete Me</button>
+          <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
           <br />
           <br />
           <form onSubmit={this.updatePicture}>
