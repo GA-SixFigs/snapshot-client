@@ -85,9 +85,12 @@ class ShowPicture extends Component {
       pictureJsx = <p>Loading...</p>
     } else {
       pictureJsx = (
-        <div >
-          <img src={picture.url}/>
-          <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
+        <div>
+          <br />
+          <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
+          <br />
+         <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
+
         </div>
       )
     }
