@@ -68,7 +68,7 @@ class ShowPicture extends Component {
       .catch(error => {
         msgAlert({
           heading: 'Failed Deleting picture',
-          message: 'Could not create picture with error:' + error.messge,
+          message: 'Could not delete picture with error:' + error.messge,
           variant: 'danger'
         })
       })
@@ -133,15 +133,15 @@ class ShowPicture extends Component {
             <h5>Tag: {picture.tag}</h5>
             <h5>Created: {moment(picture.createdAt).format('ddd, hA ')}</h5>
             <br />
-            <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>
+            {picture.owner === this.props.user._id && <Button variant='primary' onClick={this.deletePicture}>Delete Me</Button>}
             <br />
             <br />
-            <form className="updateForm" onSubmit={this.updatePicture}>
+            {picture.owner === this.props.user._id && <form className="updateForm" onSubmit={this.updatePicture}>
               <input type="text" name="caption" placeholder='New Caption Here' value={picture.caption} onChange={this.handleChange}/>
               <br />
               <input type="text" name="tag" placeholder='New tags here' value ={picture.tag} onChange={this.handleChange}/>
               <button className="upButton" type="submit">Update</button>
-            </form>
+            </form>}
           </div>
         </div>
       )
