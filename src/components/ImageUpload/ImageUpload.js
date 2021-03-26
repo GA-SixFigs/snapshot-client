@@ -1,26 +1,57 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import messages from '../AutoDismissAlert/messages'
+// import messages from '../AutoDismissAlert/messages'
+import { pictureCreate } from '../../api/Pictures'
 
 import Form from 'react-bootstrap/Form'
+import FormFile from 'react-bootstrap/FormFile'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
+import Spinner from 'react-bootstrap/Spinner'
 
 const ImageUpload = ({ user, msgAlert }) => {
-  const [title, setTitle] = useState('')
   const [caption, setCaption] = useState('')
-
-  const handleTitleChange = event => {
-    setTitle(event.target.value)
-  }
+  const [tag, setTag] = useState('')
+  const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [imageURL, setImageURL] = useState(null)
 
   const handleCaptionChange = event => {
     setCaption(event.target.value)
   }
 
+  const handleTagChange = event => {
+    const str = event.target.value.slice(1)
+    console.log(str)
+    setTag(str)
+  }
+
   const handleImageSubmit = event => {
-    console.log(event)
-    console.log(messages)
+    event.preventDefault()
+    const data = new FormData()
+    data.append('picture', image)
+    data.append('caption', caption)
+    data.append('tag', tag)
+    setLoading(true)
+    pictureCreate(user, data)
+      .then(response => {
+        setImageURL(response.data.picture.url)
+      })
+      .then(response => setLoading(false))
+      .catch(console.error)
+  }
+
+  const handleImageAdd = event => {
+    setImage(event.target.files[0])
+  }
+
+  if (loading && !imageURL) {
+    return (
+      <Spinner animation="border" variant="info">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    )
   }
 
   return (
@@ -29,19 +60,16 @@ const ImageUpload = ({ user, msgAlert }) => {
         <h3>Upload Image</h3>
         <Form onSubmit={handleImageSubmit}>
           <Form.Group controlId="image">
-            <Form.Label>Select a file: </Form.Label>
-            <Form.Control
+            <FormFile
               required
-              type="file"
-              name="image"
-              placeholder="Choose Image"
-              onChange={handleImageSubmit}
+              id="upload-file-input"
+              label="Upload File Here"
+              onChange={handleImageAdd}
             />
           </Form.Group>
           <Form.Group controlId="caption">
             <Form.Label>Caption</Form.Label>
             <Form.Control
-              required
               type="text"
               name="caption"
               value={caption}
@@ -49,25 +77,25 @@ const ImageUpload = ({ user, msgAlert }) => {
               onChange={handleCaptionChange}
             />
           </Form.Group>
-          <Form.Group controlId="title">
-            <Form.Label>title</Form.Label>
+          <Form.Group controlId="caption">
+            <Form.Label>Tag</Form.Label>
             <Form.Control
-              required
-              name="text"
-              value={title}
-              type="title"
-              placeholder="Title"
-              onChange={handleTitleChange}
+              type="text"
+              name="tag"
+              value={'#' + tag}
+              placeholder="Enter Tag"
+              onChange={handleTagChange}
             />
           </Form.Group>
           <Button
             variant="primary"
             type="submit"
           >
-            Submit
+          Submit
           </Button>
         </Form>
       </div>
+      {imageURL && <Image src={imageURL} thumbnail/>}
     </div>
   )
 }
