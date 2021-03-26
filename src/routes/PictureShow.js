@@ -86,7 +86,10 @@ class ShowPicture extends Component {
     } else {
       pictureJsx = (
         <div>
-          <img src={picture.url}/>
+          Uploaded by: {picture.ownerName}
+          <br />
+          <img src={picture.url} style={{ height: '250px', width: '250px' }}/>
+          <br />
           <button onClick={this.deletePicture}>Delete Me</button>
         </div>
       )

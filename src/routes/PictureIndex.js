@@ -41,11 +41,18 @@ class PictureIndex extends Component {
       )
     }
     const picturesJSX = pictures.map(picture => (
-      <Link to={`/pictures/${picture._id}`} key={picture._id}>
-        <li>
-          <img src={picture.url}/>
-        </li>
-      </Link>
+      <div key={picture._id}>
+        Uploaded by: {picture.ownerName}
+        <Link to={`/pictures/${picture._id}`} key={picture._id}>
+          <ul>
+            <br />
+            <img src={picture.url} className='display-image'/>
+            <br />
+            Caption: {picture.caption}
+          </ul>
+        </Link>
+        #{picture.tag}
+      </div>
     ))
 
     return (
