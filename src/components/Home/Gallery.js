@@ -20,8 +20,8 @@ class Gallery extends Component {
     galleryNoUser()
       .then(res => this.setState({ pictures: res.data.pictures }))
       .then(() => msgAlert({
-        heading: 'Loaded Pictures Successfully',
-        message: 'Viewing all Pictures. Sign in to add more!',
+        heading: 'Welcome to SnapShot!',
+        message: 'Viewing all Public Pictures. Sign in to add more!',
         variant: 'success'
       }))
       .catch(error => {
